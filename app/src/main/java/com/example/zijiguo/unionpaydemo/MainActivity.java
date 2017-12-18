@@ -68,7 +68,29 @@ public class MainActivity extends BaseActivity {
             UPPayAssistEx.startPay(activity, null, null, tn.trim(), mode);
 
         }else{
-            Log.e("---------UPPay---------","noUppay installed");
+           // UnionApy uninstalled or out of date. Install UnionPay
+             AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("提示");
+            builder.setMessage("完成购买需要安装银联支付控件，是否安装？");
+
+            builder.setNegativeButton("确定",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UPPayAssistEx.installUPPayPlugin(MainActivity.this);
+                            dialog.dismiss();
+                        }
+                    });
+
+            builder.setPositiveButton("取消",
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.create().show();
         }
 
     }
