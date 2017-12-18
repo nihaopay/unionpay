@@ -19,5 +19,6 @@ Status: show reqeust status.<br />
 Android studio minSDK version 23<br />
 Grails version :2.4.3
 
-# see MainActivity.java for demo detail 
-unionpay/app/src/main/java/com/example/zijiguo/unionpaydemo/MainActivity.java
+# Demo
+ see unionpay/app/src/main/java/com/example/zijiguo/unionpaydemo/MainActivity.java for detail <br />
+ import project into your workspace, and edit MainActivity.java to match your requirement. Do not change other files. <br />
