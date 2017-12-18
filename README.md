@@ -7,7 +7,11 @@ Currency, chose from USD, JPY, GBP, EUR, HKD, CAD.<br />
 Vendor, unionpay only. <br />
 reference number, should be an unique alphanumeric string up to 30 characters.<br />
 
-See https://docs.nihaopay.com/api/v1.2/en/ for detail.
+See https://docs.nihaopay.com/api/v1.2/en/ for detail.<br />
+Click the "click" button to start a request.<br />
+
+Output:<br />
+Status: show reqeust status.<br />
 
 # Demo Configuration
 Android studio minSDK version 23<br />
