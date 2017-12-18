@@ -18,3 +18,5 @@ Status: show reqeust status.<br />
 # Demo Configuration
 Android studio minSDK version 23<br />
 Grails version :2.4.3
+
+# see MainActivity.java for demo detail 
