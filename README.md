@@ -9,6 +9,7 @@ Vendor, unionpay only. <br />
 reference number, should be an unique alphanumeric string up to 30 characters.<br />
 
 See https://docs.nihaopay.com/api/v1.2/en/ for detail.<br />
+Replace the token number in config.java to start demo.<br />
 Click the "click" button to start a request.<br />
 
 Output:<br />
