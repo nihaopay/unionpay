@@ -20,3 +20,4 @@ Android studio minSDK version 23<br />
 Grails version :2.4.3
 
 # see MainActivity.java for demo detail 
+unionpay/app/src/main/java/com/example/zijiguo/unionpaydemo/MainActivity.java
