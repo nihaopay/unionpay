@@ -97,6 +97,7 @@ public class MainActivity extends BaseActivity {
                 Log.e("editText_Currency",editText_Currency.getText().toString().trim());
                 Log.e("editText_reference",editText_reference.getText().toString().trim());
                 Log.e("editText_Amount",editText_Amount.getText().toString().trim());
+                //gather transaction info and pass info to Nihaopay API
                 applytoapi(editText_Amount.getText().toString().trim(),editText_verndor.getText().toString().trim(),editText_Currency.getText().toString().trim(),editText_reference.getText().toString().trim());
                 break;
         }
@@ -117,11 +118,12 @@ public class MainActivity extends BaseActivity {
                             }).show();
             return;
         }
-        Log.e("Applaytoapi", "onclick works");
+        // Set current time as reference number
         Calendar calender = Calendar.getInstance();
         RequestQueue queue = Volley.newRequestQueue(this);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
         String dateStr = sdf.format(Calendar.getInstance().getTime());
+        // set Nihaopay API 
         String url = "https://api.nihaopay.com/v1.2/transactions/apppay";
         final JsonObject jsonBody = new JsonObject();
         jsonBody.addProperty("amount", amount);
@@ -130,19 +132,17 @@ public class MainActivity extends BaseActivity {
         jsonBody.addProperty("reference", reference);
 
         jsonBody.addProperty("ipn_url", "https://demo.nihaopay.com/ipn");
-        Log.e("referencenumber","reference1"+dateStr.toString().trim());
         final String requestBody = jsonBody.toString();
 // Request a string response from the provided URL.
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        Statusview.setText("Response Success");
-                        Log.e("Applaytoapi Response onres", response);
+                        Statusview.setText("NihaoPay Success");
                         try {
                             JSONObject obj = new JSONObject(response);
                            String orderinfo= (String)obj.get("orderInfo");
-                           Log.e("----orderInfo",orderinfo);
+                            // Call UnionPay with NihaoPay orderinfo
                             doStartUnionPayPlugin(MainActivity.this, orderinfo,mMode);
                         } catch (JSONException e2) {
                             // returned data is not JSONObject?
@@ -157,7 +157,7 @@ public class MainActivity extends BaseActivity {
                 if (error instanceof ServerError && response != null) {
                     try {
                         String res = new String(response.data, HttpHeaderParser.parseCharset(response.headers, "utf-8"));
-                        Log.e("response zhongyu",res+"---------------------");
+                        // show error code on edittext "status"
                         Statusview.setText(res);
                         JSONObject obj = new JSONObject(res);
                     } catch (UnsupportedEncodingException e1) {
@@ -178,8 +178,8 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
+                //set up request header
                 Map<String, String> headers = new HashMap<String, String>();
-//                params.put("Content-Type", "application/json");
                 headers.put("authorization", "Bearer " + Config.TOKEN);
                 return headers != null ? headers : super.getHeaders();
             }
@@ -190,7 +190,6 @@ public class MainActivity extends BaseActivity {
 
             @Override
             protected Response<String> parseNetworkResponse(NetworkResponse response) {
-                Log.e("Response Code", "-----------response:" + response.data.toString());
                 int statusCode = response.statusCode;
                 switch (statusCode) {
                     case HttpURLConnection.HTTP_OK:
