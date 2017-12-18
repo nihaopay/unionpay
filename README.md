@@ -1,5 +1,6 @@
 # unionpay
 UnionPay demo with NihaoPay API integrated -Andorid Studio <br />
+Send request to NihaoPay's API and call UnionPay APK with nihaopay's response. 
 
 Input: <br />
 Amount, Total amount of purchase product.<br />
